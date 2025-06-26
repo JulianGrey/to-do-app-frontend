@@ -24,10 +24,11 @@ export default tseslint.config([
       '@stylistic': stylistic
     },
     rules: {
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
       '@stylistic/eol-last': ['error'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/no-trailing-spaces': ['error'],
-      '@stylistic/semi': ['error', 'always']
+      '@stylistic/semi': ['error', 'always'],
     }
   },
 ])
