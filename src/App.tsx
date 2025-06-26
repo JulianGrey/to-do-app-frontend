@@ -2,8 +2,6 @@ import { useState } from 'react';
 import './App.scss';
 import { ToDo } from './components/ToDo/ToDo';
 
-
-
 function App() {
   const defaultMessage = 'You have no tasks.';
   const headerTitle = 'Your To-dos';
