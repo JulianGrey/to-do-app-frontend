@@ -4,12 +4,27 @@
   margin-top: 12px;
   padding: 10px;
 
-  .to-do-headline {
-    display: flex;
-    align-items: baseline;
+  .to-do-header {
+    &, .headline {
+      display: flex;
+    }
 
-    .to-do-category {
-      margin-left: 8px;
+    align-items: center;
+    justify-content: space-between;
+
+    .headline {
+      align-items: baseline;
+
+      .to-do-category {
+        margin-left: 8px;
+      }
+    }
+
+    .actions {
+      button {
+        cursor: pointer;
+        margin-left: 4px;
+      }
     }
   }
 

@@ -34,9 +34,7 @@ function App() {
               </ul>
             )
           }
-          {
-            !toDoList.length && (<p>{defaultMessage}</p>)
-          }
+          { !toDoList.length && (<p>{defaultMessage}</p>) }
         </div>
       </main>
       <footer></footer>

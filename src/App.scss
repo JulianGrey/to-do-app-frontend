@@ -1,5 +1,12 @@
 .to-do-app {
-  .to-do-list {
-    width: fit-content;
+  main {
+    margin: auto;
+    display: flex;
+    max-width: 800px;
+    flex-direction: column;
+
+    .to-do-list {
+      // width: fit-content;
+    }
   }
 }
