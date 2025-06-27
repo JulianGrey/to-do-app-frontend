@@ -29,10 +29,12 @@ export default function ToDo({ toDo }: { toDo: ToDoProps }) {
               <>
                 <button
                   className='edit'
+                  data-testId='edit-button'
                   onClick={() => handleIsEditing(true)}
                 >Edit</button>
                 <button
                   className='delete'
+                  data-testId='delete-button'
                   onClick={() => {}}
                 >Delete</button>
               </>
@@ -44,10 +46,12 @@ export default function ToDo({ toDo }: { toDo: ToDoProps }) {
                 <button
                   className='save'
                   onClick={() => {}}
+                  data-testId='save-button'
                 >Save</button>
                 <button
                   className='cancel'
                   onClick={() => handleIsEditing(false)}
+                  data-testId='cancel-button'
                 >Cancel</button>
               </>
             )
