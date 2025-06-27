@@ -7,7 +7,7 @@ interface ToDoProps {
   title: string,
 }
 
-export function ToDo({ toDo }: { toDo: ToDoProps }) {
+export default function ToDo({ toDo }: { toDo: ToDoProps }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function handleIsEditing(value: boolean) {
@@ -18,8 +18,10 @@ export function ToDo({ toDo }: { toDo: ToDoProps }) {
     <li className='to-do'>
       <div className='to-do-header'>
         <div className='headline'>
-          <h2 className='to-do-title'>{toDo.title}</h2>
-          {toDo.category && <h3 className='to-do-category'>({toDo.category})</h3>}
+          <h2 className='to-do-title' data-testid='to-do-title'>{toDo.title}</h2>
+          {toDo.category &&
+            <h3 className='to-do-category' data-testid='to-do-category'>({toDo.category})</h3>
+          }
         </div>
         <div className='actions'>
           {
@@ -52,7 +54,9 @@ export function ToDo({ toDo }: { toDo: ToDoProps }) {
           }
         </div>
       </div>
-      {toDo.description && <p className='to-do-description'>{toDo.description}</p>}
+      {toDo.description &&
+        <p className='to-do-description' data-testid='to-do-description'>{toDo.description}</p>
+      }
     </li>
   );
 }
