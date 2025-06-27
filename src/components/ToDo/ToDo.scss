@@ -5,12 +5,12 @@
   padding: 10px;
 
   .to-do-header {
+    align-items: center;
+    justify-content: space-between;
+
     &, .headline {
       display: flex;
     }
-
-    align-items: center;
-    justify-content: space-between;
 
     .headline {
       align-items: baseline;
