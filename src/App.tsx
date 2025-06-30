@@ -1,24 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.scss';
+import { getToDos } from './services/toDoService';
 import ToDo from './components/ToDo/ToDo';
 
 function App() {
   const defaultMessage = 'You have no tasks.';
   const headerTitle = 'Your To-dos';
-  const [toDoList, setToDoList] = useState([
-    {
-      category: 'Event',
-      description: 'To Do Description',
-      title: 'To Do Title',
-    },
-    {
-      title: 'To Do Title 2',
-    },
-    {
-      description: 'To Do Description 3',
-      title: 'To Do Title 3',
-    },
-  ]);
+  const [toDoList, setToDoList] = useState([]);
+
+  async function handleToDoList() {
+    setToDoList(await getToDos());
+  }
+
+  useEffect(() => {
+    handleToDoList();
+  }, []);
 
   return (
     <div className='to-do-app'>
