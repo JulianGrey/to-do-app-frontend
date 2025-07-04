@@ -30,20 +30,6 @@ describe('ToDo component', () => {
     expect(description).toBeNull();
   });
 
-  it('renders the category if provided', () => {
-    render(<ToDo toDo={{ title: 'Test Title', category: 'Test Category' }} />);
-    const category = screen.getByTestId('to-do-category');
-
-    expect(category.textContent).toBe('(Test Category)');
-  });
-
-  it('does not render the category if not provided', () => {
-    render(<ToDo toDo={{ title: 'Test Title' }} />);
-    const category = screen.queryByTestId('to-do-category');
-
-    expect(category).toBeNull();
-  });
-
   it('shows the edit and delete buttons by default', () => {
     render(<ToDo toDo={{ title: 'Test Title' }} />);
     const deleteButton = findDeleteButton();

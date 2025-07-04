@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './ToDo.scss';
 
 interface ToDoProps {
-  category?: string,
   description?: string,
   title: string,
 }
@@ -19,9 +18,6 @@ export default function ToDo({ toDo }: { toDo: ToDoProps }) {
       <div className='to-do-header'>
         <div className='headline'>
           <h2 className='to-do-title' data-testid='to-do-title'>{toDo.title}</h2>
-          {toDo.category &&
-            <h3 className='to-do-category' data-testid='to-do-category'>({toDo.category})</h3>
-          }
         </div>
         <div className='actions'>
           {
