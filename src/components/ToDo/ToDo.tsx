@@ -102,7 +102,7 @@ export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoC
                   className='add'
                   onClick={() => onAdd(editedDescription, editedTitle)}
                   data-testid='add-button'
-                >Add</button>
+                >Add new to do</button>
               </>
             )
           }
