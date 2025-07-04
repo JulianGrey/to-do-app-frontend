@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
 import { getToDos } from './services/toDoService';
-import ToDo from './components/ToDo/ToDo';
+import ToDo, { type ToDoProps } from './components/ToDo/ToDo';
 
 function App() {
   const defaultMessage = 'You have no tasks.';
   const headerTitle = 'Your To-dos';
-  const [toDoList, setToDoList] = useState([]);
+  const [toDoList, setToDoList] = useState<ToDoProps[]>([]);
 
   async function handleToDoList() {
     setToDoList(await getToDos());
+  }
+
+  async function handleAddTodo(description: string, title: string) {
+    const newToDoList = [...toDoList];
+    const newToDo = { description, title };
+
+    newToDoList.push(newToDo);
+    setToDoList(newToDoList);
   }
 
   useEffect(() => {
@@ -26,7 +34,7 @@ function App() {
           {
             (
               <ul>
-                <ToDo toDo={{ title: '' }} isNewToDo={true} />
+                <ToDo toDo={{ description: '', title: '' }} isNewToDo={true} onAdd={handleAddTodo} />
                 {toDoList.length > 0 && toDoList.map((toDo, index) => <ToDo toDo={toDo} key={index} />)}
               </ul>
             )

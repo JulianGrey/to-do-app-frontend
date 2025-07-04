@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import './ToDo.scss';
 
-interface ToDoProps {
-  description?: string,
+export interface ToDoProps {
+  description: string,
   title: string,
 }
 
 interface ToDoComponentProps {
   toDo: ToDoProps;
   isNewToDo?: boolean
+  onAdd?: (description: string, title: string) => void;
 }
 
-export default function ToDo({ toDo, isNewToDo = false}: ToDoComponentProps) {
+export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoComponentProps) {
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
@@ -20,9 +21,7 @@ export default function ToDo({ toDo, isNewToDo = false}: ToDoComponentProps) {
 
   useEffect(() => {
     setCurrentTitle(toDo.title);
-    if (toDo.description) {
-      setCurrentDescription(toDo.description);
-    }
+    setCurrentDescription(toDo.description);
   }, [toDo.description, toDo.title]);
 
   function handleEditTtile(event: React.ChangeEvent<HTMLInputElement>) {
@@ -101,7 +100,7 @@ export default function ToDo({ toDo, isNewToDo = false}: ToDoComponentProps) {
               <>
                 <button
                   className='add'
-                  onClick={() => {}}
+                  onClick={() => onAdd(editedDescription, editedTitle)}
                   data-testid='add-button'
                 >Add</button>
               </>
