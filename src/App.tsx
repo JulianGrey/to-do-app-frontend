@@ -24,13 +24,14 @@ function App() {
       <main>
         <div className='to-do-list'>
           {
-            toDoList.length > 0 && (
+            (
               <ul>
-                {toDoList.map((toDo, index) => <ToDo toDo={toDo} key={index} />)}
+                <ToDo toDo={{ title: '' }} isNewToDo={true} />
+                {toDoList.length > 0 && toDoList.map((toDo, index) => <ToDo toDo={toDo} key={index} />)}
               </ul>
             )
           }
-          { !toDoList.length && (<p>{defaultMessage}</p>) }
+          { !toDoList.length && (<p className='no-to-dos'>{defaultMessage}</p>) }
         </div>
       </main>
       <footer></footer>

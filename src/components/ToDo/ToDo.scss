@@ -4,6 +4,22 @@
   margin-top: 12px;
   padding: 10px;
 
+  .edit-to-do {
+    display: flex;
+
+    label {
+      min-width: 130px;
+    }
+
+    &.edit-to-do-description {
+      margin-top: 8px;
+    }
+
+    input {
+      min-width: 200px;
+    }
+  }
+
   .to-do-header {
     align-items: center;
     justify-content: space-between;

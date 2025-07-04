@@ -4,26 +4,27 @@ import { describe, it, expect } from 'vitest';
 import ToDo from './ToDo';
 
 describe('ToDo component', () => {
+  const findAddButton = () => screen.queryByTestId('add-button');
   const findCancelButton = () => screen.queryByTestId('cancel-button');
   const findDeleteButton = () => screen.queryByTestId('delete-button');
   const findEditButton = () => screen.queryByTestId('edit-button');
   const findSaveButton = () => screen.queryByTestId('save-button');
 
-  it('renders the provided title', () => {
+  it('shows the provided title', () => {
     render(<ToDo toDo={{ title: 'Test Title' }} />);
     const title = screen.getByTestId('to-do-title');
 
     expect(title.textContent).toBe('Test Title');
   });
 
-  it('renders the description if provided', () => {
+  it('shows the description if provided', () => {
     render(<ToDo toDo={{ title: 'Test Title', description: 'Test Description' }} />);
     const description = screen.getByTestId('to-do-description');
 
     expect(description.textContent).toBe('Test Description');
   });
 
-  it('does not render the description if not provided', () => {
+  it('does not show the description if not provided', () => {
     render(<ToDo toDo={{ title: 'Test Title' }} />);
     const description = screen.queryByTestId('to-do-description');
 
@@ -62,16 +63,20 @@ describe('ToDo component', () => {
 
   it('goes back to the default actions view', () => {
     render(<ToDo toDo={{ title: 'Test Title' }} />);
+    let cancelButton = findCancelButton();
     let deleteButton = findDeleteButton();
     let editButton = findEditButton();
+    let saveButton = findSaveButton();
 
+    expect(cancelButton).toBeNull();
     expect(deleteButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
+    expect(saveButton).toBeNull();
 
     fireEvent.click(editButton);
 
-    let cancelButton = findCancelButton();
-    let saveButton = findSaveButton();
+    cancelButton = findCancelButton();
+    saveButton = findSaveButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
 
@@ -91,5 +96,41 @@ describe('ToDo component', () => {
     expect(deleteButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
     expect(saveButton).toBeNull();
+  });
+
+  it('should show the Add button for new to dos', () => {
+    render(<ToDo toDo={{ title: 'Test Title' }} isNewToDo={true} />);
+    const addButton = findAddButton();
+    const cancelButton = findCancelButton();
+    const deleteButton = findDeleteButton();
+    const editButton = findEditButton();
+    const saveButton = findSaveButton();
+
+    expect(addButton).toBeInTheDocument();
+    expect(cancelButton).toBeNull();
+    expect(deleteButton).toBeNull();
+    expect(editButton).toBeNull();
+    expect(saveButton).toBeNull();
+  });
+
+  it('should not show the "Add" button for saved to dos when viewing or editing', () => {
+    render(<ToDo toDo={{ title: 'Test Title' }} />);
+    let addButton = findAddButton();
+    let cancelButton = findCancelButton();
+    let editButton = findEditButton();
+
+    expect(addButton).toBeNull();
+    expect(cancelButton).toBeNull();
+    expect(editButton).toBeInTheDocument();
+
+    fireEvent.click(editButton);
+
+    addButton = findAddButton();
+    cancelButton = findCancelButton();
+    editButton = findEditButton();
+
+    expect(addButton).toBeNull();
+    expect(cancelButton).toBeInTheDocument();
+    expect(editButton).toBeNull();
   });
 });
