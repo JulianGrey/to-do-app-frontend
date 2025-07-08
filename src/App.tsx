@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
-import { getToDos } from './services/toDoService';
+import { addToDo, getToDos } from './services/toDoService';
 import ToDo, { type ToDoProps } from './components/ToDo/ToDo';
 
 function App() {
@@ -13,11 +13,13 @@ function App() {
   }
 
   async function handleAddTodo(description: string, title: string) {
-    const newToDoList = [...toDoList];
-    const newToDo = { description, title };
+    try {
+      await addToDo(description, title);
 
-    newToDoList.push(newToDo);
-    setToDoList(newToDoList);
+      setToDoList(await getToDos());
+    } catch (error) {
+      console.error('Failed to add to do', error);
+    }
   }
 
   useEffect(() => {
