@@ -12,9 +12,9 @@ function App() {
     setToDoList(await getToDos());
   }
 
-  async function handleAddTodo(description: string, title: string) {
+  async function handleAddTodo(title: string, description: string) {
     try {
-      await addToDo(description, title);
+      await addToDo(title, description);
 
       setToDoList(await getToDos());
     } catch (error) {
@@ -36,7 +36,7 @@ function App() {
           {
             (
               <ul>
-                <ToDo toDo={{ description: '', title: '' }} isNewToDo={true} onAdd={handleAddTodo} />
+                <ToDo toDo={{ title: '', description: '' }} isNewToDo={true} onAdd={handleAddTodo} />
                 {toDoList.length > 0 && toDoList.map((toDo, index) => <ToDo toDo={toDo} key={index} />)}
               </ul>
             )

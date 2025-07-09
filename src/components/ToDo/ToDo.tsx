@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import './ToDo.scss';
 
 export interface ToDoProps {
-  description: string,
   title: string,
+  description: string,
 }
 
 interface ToDoComponentProps {
   toDo: ToDoProps;
   isNewToDo?: boolean
-  onAdd?: (description: string, title: string) => void;
+  onAdd?: (title: string, description: string) => void;
 }
 
 export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoComponentProps) {
@@ -22,7 +22,7 @@ export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoC
   useEffect(() => {
     setCurrentTitle(toDo.title);
     setCurrentDescription(toDo.description);
-  }, [toDo.description, toDo.title]);
+  }, [toDo.title, toDo.description]);
 
   function handleEditTtile(event: React.ChangeEvent<HTMLInputElement>) {
     setEditedTitle(event.target.value);
@@ -100,7 +100,7 @@ export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoC
               <>
                 <button
                   className='add'
-                  onClick={() => onAdd(editedDescription, editedTitle)}
+                  onClick={() => onAdd(editedTitle, editedDescription)}
                   data-testid='add-button'
                 >Add new to do</button>
               </>
