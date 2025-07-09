@@ -37,6 +37,14 @@ export default function Todo({
     setEditedTitle(event.target.value);
   }
 
+  async function handleAdd() {
+    if (editedTitle) {
+      await onAdd(editedTitle, editedDescription);
+      setEditedTitle('');
+      setEditedDescription('');
+    }
+  }
+
   function handleIsEditing(value: boolean) {
     if (value) {
       setEditedDescription(currentDescription);
@@ -112,7 +120,7 @@ export default function Todo({
               <>
                 <button
                   className='add'
-                  onClick={() => onAdd(editedTitle, editedDescription)}
+                  onClick={handleAdd}
                   data-testid='add-button'
                 >Add new to do</button>
               </>
