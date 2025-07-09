@@ -1,7 +1,7 @@
-const API_BASE_URL = 'http://localhost:3000/api/todos';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function getToDos() {
-  const response = await fetch(API_BASE_URL);
+  const response = await fetch(`${API_BASE_URL}todos`);
   if (!response.ok) {
     throw new Error('Failed to fetch to dos');
   }
@@ -10,7 +10,7 @@ export async function getToDos() {
 }
 
 export async function addToDo(title: string, description: string) {
-  const response = await fetch(`${API_BASE_URL}/add`, {
+  const response = await fetch(`${API_BASE_URL}todos/add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
