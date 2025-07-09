@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
-import './ToDo.scss';
+import './Todo.scss';
 
-export interface ToDoProps {
+export interface TodoProps {
   title: string,
   description: string,
   id?: number,
 }
 
-interface ToDoComponentProps {
-  toDo: ToDoProps;
-  isNewToDo?: boolean;
+interface TodoComponentProps {
+  todo: TodoProps;
+  isNewTodo?: boolean;
   onAdd?: (title: string, description: string) => void;
   onDelete?: (id: number) => void;
 }
 
-export default function ToDo({
-  toDo,
-  isNewToDo = false,
+export default function Todo({
+  todo,
+  isNewTodo = false,
   onAdd = () => {},
   onDelete = () => {},
-}: ToDoComponentProps) {
+}: TodoComponentProps) {
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
@@ -27,9 +27,9 @@ export default function ToDo({
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    setCurrentTitle(toDo.title);
-    setCurrentDescription(toDo.description);
-  }, [toDo.title, toDo.description]);
+    setCurrentTitle(todo.title);
+    setCurrentDescription(todo.description);
+  }, [todo.title, todo.description]);
 
   function handleEditTtile(event: React.ChangeEvent<HTMLInputElement>) {
     setEditedTitle(event.target.value);
@@ -53,7 +53,7 @@ export default function ToDo({
     <li className='to-do'>
       <div className='to-do-header'>
         <div className='headline'>
-          { isNewToDo || isEditing
+          { isNewTodo || isEditing
             ? (
               <div className='edit-to-do-title edit-to-do'>
                 <label htmlFor='edit-to-do-title'>Title:</label>
@@ -71,7 +71,7 @@ export default function ToDo({
         </div>
         <div className='actions'>
           {
-            (!isEditing && !isNewToDo) && (
+            (!isEditing && !isNewTodo) && (
               <>
                 <button
                   className='edit'
@@ -81,7 +81,7 @@ export default function ToDo({
                 <button
                   className='delete'
                   onClick={() => {
-                    if (toDo.id !== undefined) onDelete(toDo.id);
+                    if (todo.id !== undefined) onDelete(todo.id);
                   }}
                   data-testid='delete-button'
                 >Delete</button>
@@ -105,7 +105,7 @@ export default function ToDo({
             )
           }
           {
-            isNewToDo && (
+            isNewTodo && (
               <>
                 <button
                   className='add'
@@ -118,7 +118,7 @@ export default function ToDo({
         </div>
       </div>
       <div className='to-do-body'>
-        { (isNewToDo || isEditing) &&
+        { (isNewTodo || isEditing) &&
           (
             <div className='edit-to-do-description edit-to-do'>
               <label htmlFor='edit-to-do-description'>Description:</label>
@@ -131,7 +131,7 @@ export default function ToDo({
             </div>
           )
         }
-        {currentDescription && !(isNewToDo || isEditing) &&
+        {currentDescription && !(isNewTodo || isEditing) &&
           <p className='to-do-description' data-testid='to-do-description'>{currentDescription}</p>
         }
       </div>

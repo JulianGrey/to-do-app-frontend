@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import ToDo from './ToDo';
+import Todo from './Todo';
 
-describe('ToDo component', () => {
+describe('Todo component', () => {
   const findAddButton = () => screen.queryByTestId('add-button');
   const findCancelButton = () => screen.queryByTestId('cancel-button');
   const findDeleteButton = () => screen.queryByTestId('delete-button');
@@ -11,28 +11,28 @@ describe('ToDo component', () => {
   const findSaveButton = () => screen.queryByTestId('save-button');
 
   it('shows the provided title', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     const title = screen.getByTestId('to-do-title');
 
     expect(title.textContent).toBe('Test Title');
   });
 
   it('shows the description if provided', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: 'Test Description' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: 'Test Description' }} />);
     const description = screen.getByTestId('to-do-description');
 
     expect(description.textContent).toBe('Test Description');
   });
 
   it('does not show the description if not provided', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     const description = screen.queryByTestId('to-do-description');
 
     expect(description).toBeNull();
   });
 
   it('shows the edit and delete buttons by default', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     const deleteButton = findDeleteButton();
     const editButton = findEditButton();
 
@@ -41,7 +41,7 @@ describe('ToDo component', () => {
   });
 
   it('shows the save and cancel buttons in edit mode', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     let deleteButton = findDeleteButton();
     let editButton = findEditButton();
 
@@ -62,7 +62,7 @@ describe('ToDo component', () => {
   });
 
   it('goes back to the default actions view', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     let cancelButton = findCancelButton();
     let deleteButton = findDeleteButton();
     let editButton = findEditButton();
@@ -99,7 +99,7 @@ describe('ToDo component', () => {
   });
 
   it('should show the Add button for new to dos', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} isNewToDo={true} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} isNewTodo={true} />);
     const addButton = findAddButton();
     const cancelButton = findCancelButton();
     const deleteButton = findDeleteButton();
@@ -114,7 +114,7 @@ describe('ToDo component', () => {
   });
 
   it('should not show the "Add" button for saved to dos when viewing or editing', () => {
-    render(<ToDo toDo={{ title: 'Test Title', description: '' }} />);
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
     let addButton = findAddButton();
     let cancelButton = findCancelButton();
     let editButton = findEditButton();

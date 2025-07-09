@@ -1,39 +1,39 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
-import { addToDo, deleteToDo, getToDos } from './services/toDoService';
-import ToDo, { type ToDoProps } from './components/ToDo/ToDo';
+import { addTodo, deleteTodo, getTodos } from './services/todoService';
+import Todo, { type TodoProps } from './components/Todo/Todo';
 
 function App() {
   const defaultMessage = 'You have no tasks.';
   const headerTitle = 'Your To-dos';
-  const [toDoList, setToDoList] = useState<ToDoProps[]>([]);
+  const [todoList, setTodoList] = useState<TodoProps[]>([]);
 
-  async function handleToDoList() {
-    setToDoList(await getToDos());
+  async function handleTodoList() {
+    setTodoList(await getTodos());
   }
 
   async function handleAddTodo(title: string, description: string) {
     try {
-      await addToDo(title, description);
+      await addTodo(title, description);
 
-      setToDoList(await getToDos());
+      setTodoList(await getTodos());
     } catch (err) {
       console.error('Failed to add to do');
     }
   }
 
-  async function handleDeleteToDo(id: number) {
+  async function handleDeleteTodo(id: number) {
     try {
-      await deleteToDo(id);
+      await deleteTodo(id);
 
-      setToDoList(await getToDos());
+      setTodoList(await getTodos());
     } catch (err) {
       console.error('Failed to delete to do');
     }
   }
 
   useEffect(() => {
-    handleToDoList();
+    handleTodoList();
   }, []);
 
   return (
@@ -46,22 +46,22 @@ function App() {
           {
             (
               <ul>
-                <ToDo
-                  toDo={{ title: '', description: '' }}
-                  isNewToDo={true}
+                <Todo
+                  todo={{ title: '', description: '' }}
+                  isNewTodo={true}
                   onAdd={handleAddTodo}
                 />
-                {toDoList.length > 0 && toDoList.map((toDo, index) => (
-                  <ToDo
-                    toDo={toDo}
+                {todoList.length > 0 && todoList.map((todo, index) => (
+                  <Todo
+                    todo={todo}
                     key={index}
-                    onDelete={handleDeleteToDo}
+                    onDelete={handleDeleteTodo}
                   />
                 ))}
               </ul>
             )
           }
-          { !toDoList.length && (<p className='no-to-dos'>{defaultMessage}</p>) }
+          { !todoList.length && (<p className='no-to-dos'>{defaultMessage}</p>) }
         </div>
       </main>
       <footer></footer>
