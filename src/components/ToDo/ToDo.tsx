@@ -4,15 +4,22 @@ import './ToDo.scss';
 export interface ToDoProps {
   title: string,
   description: string,
+  id?: number,
 }
 
 interface ToDoComponentProps {
   toDo: ToDoProps;
-  isNewToDo?: boolean
+  isNewToDo?: boolean;
   onAdd?: (title: string, description: string) => void;
+  onDelete?: (id: number) => void;
 }
 
-export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoComponentProps) {
+export default function ToDo({
+  toDo,
+  isNewToDo = false,
+  onAdd = () => {},
+  onDelete = () => {},
+}: ToDoComponentProps) {
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
@@ -73,8 +80,10 @@ export default function ToDo({ toDo, isNewToDo = false, onAdd = () => {}}: ToDoC
                 >Edit</button>
                 <button
                   className='delete'
+                  onClick={() => {
+                    if (toDo.id !== undefined) onDelete(toDo.id);
+                  }}
                   data-testid='delete-button'
-                  onClick={() => {}}
                 >Delete</button>
               </>
             )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
-import { addToDo, getToDos } from './services/toDoService';
+import { addToDo, deleteToDo, getToDos } from './services/toDoService';
 import ToDo, { type ToDoProps } from './components/ToDo/ToDo';
 
 function App() {
@@ -17,8 +17,18 @@ function App() {
       await addToDo(title, description);
 
       setToDoList(await getToDos());
-    } catch (error) {
-      console.error('Failed to add to do', error);
+    } catch (err) {
+      console.error('Failed to add to do');
+    }
+  }
+
+  async function handleDeleteToDo(id: number) {
+    try {
+      await deleteToDo(id);
+
+      setToDoList(await getToDos());
+    } catch (err) {
+      console.error('Failed to delete to do');
     }
   }
 
@@ -36,8 +46,18 @@ function App() {
           {
             (
               <ul>
-                <ToDo toDo={{ title: '', description: '' }} isNewToDo={true} onAdd={handleAddTodo} />
-                {toDoList.length > 0 && toDoList.map((toDo, index) => <ToDo toDo={toDo} key={index} />)}
+                <ToDo
+                  toDo={{ title: '', description: '' }}
+                  isNewToDo={true}
+                  onAdd={handleAddTodo}
+                />
+                {toDoList.length > 0 && toDoList.map((toDo, index) => (
+                  <ToDo
+                    toDo={toDo}
+                    key={index}
+                    onDelete={handleDeleteToDo}
+                  />
+                ))}
               </ul>
             )
           }
