@@ -1,0 +1,25 @@
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+
+  &, .modal-dialog {
+    display: flex;
+  }
+
+  .modal-dialog {
+    background: #fff;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
