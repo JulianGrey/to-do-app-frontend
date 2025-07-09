@@ -12,6 +12,7 @@ interface TodoComponentProps {
   isNewTodo?: boolean;
   onAdd?: (title: string, description: string) => void;
   onDelete?: (id: number) => void;
+  onUpdate?: (title: string, description: string, id: number) => void;
 }
 
 export default function Todo({
@@ -19,6 +20,7 @@ export default function Todo({
   isNewTodo = false,
   onAdd = () => {},
   onDelete = () => {},
+  onUpdate = () => {},
 }: TodoComponentProps) {
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
@@ -43,10 +45,11 @@ export default function Todo({
     setIsEditing(() => value);
   }
 
-  function handleSave() {
-    setCurrentDescription(editedDescription);
-    setCurrentTitle(editedTitle);
-    handleIsEditing(false);
+  async function handleUpdate() {
+    if (todo.id !== undefined) {
+      await onUpdate(editedTitle, editedDescription, todo.id);
+      handleIsEditing(false);
+    }
   }
 
   return (
@@ -92,10 +95,10 @@ export default function Todo({
             isEditing && (
               <>
                 <button
-                  className='save'
-                  onClick={handleSave}
-                  data-testid='save-button'
-                >Save</button>
+                  className='update'
+                  onClick={handleUpdate}
+                  data-testid='update-button'
+                >Update</button>
                 <button
                   className='cancel'
                   onClick={() => handleIsEditing(false)}

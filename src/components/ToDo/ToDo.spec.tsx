@@ -8,7 +8,7 @@ describe('Todo component', () => {
   const findCancelButton = () => screen.queryByTestId('cancel-button');
   const findDeleteButton = () => screen.queryByTestId('delete-button');
   const findEditButton = () => screen.queryByTestId('edit-button');
-  const findSaveButton = () => screen.queryByTestId('save-button');
+  const findUpdateButton = () => screen.queryByTestId('update-button');
 
   it('shows the provided title', () => {
     render(<Todo todo={{ title: 'Test Title', description: '' }} />);
@@ -51,7 +51,7 @@ describe('Todo component', () => {
     fireEvent.click(editButton);
 
     const cancelButton = findCancelButton();
-    const saveButton = findSaveButton();
+    const saveButton = findUpdateButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
 
@@ -66,7 +66,7 @@ describe('Todo component', () => {
     let cancelButton = findCancelButton();
     let deleteButton = findDeleteButton();
     let editButton = findEditButton();
-    let saveButton = findSaveButton();
+    let saveButton = findUpdateButton();
 
     expect(cancelButton).toBeNull();
     expect(deleteButton).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('Todo component', () => {
     fireEvent.click(editButton);
 
     cancelButton = findCancelButton();
-    saveButton = findSaveButton();
+    saveButton = findUpdateButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
 
@@ -90,7 +90,7 @@ describe('Todo component', () => {
     cancelButton = findCancelButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
-    saveButton = findSaveButton();
+    saveButton = findUpdateButton();
 
     expect(cancelButton).toBeNull();
     expect(deleteButton).toBeInTheDocument();
@@ -104,7 +104,7 @@ describe('Todo component', () => {
     const cancelButton = findCancelButton();
     const deleteButton = findDeleteButton();
     const editButton = findEditButton();
-    const saveButton = findSaveButton();
+    const saveButton = findUpdateButton();
 
     expect(addButton).toBeInTheDocument();
     expect(cancelButton).toBeNull();

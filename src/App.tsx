@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
-import { addTodo, deleteTodo, getTodos } from './services/todoService';
+import {
+  addTodo,
+  deleteTodo,
+  getTodos,
+  updateTodo,
+} from './services/todoService';
 import Todo, { type TodoProps } from './components/Todo/Todo';
 
 function App() {
@@ -15,7 +20,6 @@ function App() {
   async function handleAddTodo(title: string, description: string) {
     try {
       await addTodo(title, description);
-
       setTodoList(await getTodos());
     } catch (err) {
       console.error('Failed to add to do');
@@ -25,7 +29,15 @@ function App() {
   async function handleDeleteTodo(id: number) {
     try {
       await deleteTodo(id);
+      setTodoList(await getTodos());
+    } catch (err) {
+      console.error('Failed to delete to do');
+    }
+  }
 
+  async function handleUpdateTodo(title: string, description: string, id: number) {
+    try {
+      await updateTodo(title, description, id);
       setTodoList(await getTodos());
     } catch (err) {
       console.error('Failed to delete to do');
@@ -56,6 +68,7 @@ function App() {
                     todo={todo}
                     key={index}
                     onDelete={handleDeleteTodo}
+                    onUpdate={handleUpdateTodo}
                   />
                 ))}
               </ul>
