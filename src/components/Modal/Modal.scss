@@ -12,18 +12,18 @@
 
   .modal-dialog {
     background: #fff;
-    width: 500px;
-    height: 300px;
     margin: auto;
 
     flex-direction: column;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     align-items: center;
     justify-content: space-evenly;
   }
 
   .modal-actions {
+    margin-top: 24px;
+
     button {
       cursor: pointer;
       margin-left: 4px;
