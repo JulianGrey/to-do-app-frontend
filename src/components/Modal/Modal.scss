@@ -22,4 +22,11 @@
     align-items: center;
     justify-content: space-evenly;
   }
+
+  .modal-actions {
+    button {
+      cursor: pointer;
+      margin-left: 4px;
+    }
+  }
 }
