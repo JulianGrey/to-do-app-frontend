@@ -1,4 +1,4 @@
-.to-do-app {
+#to-do-app {
   main {
     margin: auto;
     display: flex;
@@ -8,5 +8,13 @@
     .no-to-dos {
       margin-top: 12px;
     }
+  }
+
+  .blue-container {
+    border: 1px solid rgba(0, 0, 0, 0.36);
+    border-radius: 10px;
+    padding: 10px;
+    background: rgb(211 243 247);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.6), inset -5px -5px 5px rgba(181, 235, 242, 1), inset 5px 5px 5px rgba(234, 253, 255, 1);
   }
 }

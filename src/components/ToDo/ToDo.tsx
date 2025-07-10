@@ -76,7 +76,7 @@ export default function Todo({
 
   return (
     <>
-      <li className='to-do'>
+      <li className='to-do blue-container'>
         <div className='to-do-header'>
           <div className='headline'>
             { isNewTodo || isEditing
@@ -164,7 +164,7 @@ export default function Todo({
         <Modal onCancel={() => setShowModal(false)} onConfirm={handleDelete}>
           <p>Are you sure you want to delete "{todo.title}"?</p>
         </Modal>,
-        document.body,
+        document.getElementById('to-do-app') as HTMLElement,
       )}
     </>
   );

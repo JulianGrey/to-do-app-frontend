@@ -10,7 +10,7 @@ interface ModalProps {
 export default function Modal({ onCancel, onConfirm, children }: ModalProps) {
   return (
     <div className='modal'>
-      <div className='modal-dialog'>
+      <div className='modal-dialog blue-container'>
         { children }
         <div className='modal-actions'>
           <button onClick={onCancel}>Cancel</button>

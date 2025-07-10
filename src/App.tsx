@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   return (
-    <div className='to-do-app'>
+    <div id='to-do-app'>
       <header>
         <h1>{headerTitle}</h1>
       </header>
