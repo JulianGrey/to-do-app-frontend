@@ -9,7 +9,7 @@ interface ModalProps {
 
 export default function Modal({ onCancel, onConfirm, children }: ModalProps) {
   return (
-    <div className='modal'>
+    <div className='modal' data-testid='modal'>
       <div className='modal-dialog blue-container'>
         { children }
         <div className='modal-actions'>

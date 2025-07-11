@@ -1,13 +1,24 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import Todo from './Todo';
+
+beforeEach(() => {
+  const div = document.createElement('div');
+  div.setAttribute('id', 'to-do-app');
+  document.body.appendChild(div);
+});
+
+afterEach(() => {
+  document.body.innerHTML = '';
+});
 
 describe('Todo component', () => {
   const findAddButton = () => screen.queryByTestId('add-button');
   const findCancelButton = () => screen.queryByTestId('cancel-button');
   const findDeleteButton = () => screen.queryByTestId('delete-button');
   const findEditButton = () => screen.queryByTestId('edit-button');
+  const findModal = () => screen.queryByTestId('modal');
   const findUpdateButton = () => screen.queryByTestId('update-button');
 
   it('shows the provided title', () => {
@@ -132,5 +143,16 @@ describe('Todo component', () => {
     expect(addButton).toBeNull();
     expect(cancelButton).toBeInTheDocument();
     expect(editButton).toBeNull();
+  });
+
+  it('should show a modal when the "Delete" button is clicked', () => {
+    render(<Todo todo={{ title: 'Test Title', description: '' }} />);
+    const deleteButton = findDeleteButton();
+    expect(deleteButton).toBeInTheDocument();
+
+    fireEvent.click(deleteButton);
+
+    const modal = findModal();
+    expect(modal).toBeInTheDocument();
   });
 });
