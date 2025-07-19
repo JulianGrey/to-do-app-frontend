@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
+import Button from '../Button/Button';
 import './Modal.scss';
 
 interface ModalProps {
@@ -13,8 +14,14 @@ export default function Modal({ onCancel, onConfirm, children }: ModalProps) {
       <div className='modal-dialog blue-container'>
         { children }
         <div className='modal-actions'>
-          <button onClick={onCancel}>Cancel</button>
-          <button onClick={onConfirm}>Confirm</button>
+          <Button
+            id='cancel'
+            onClick={onCancel}
+          >Cancel</Button>
+          <Button
+            id='confirm'
+            onClick={onConfirm}
+          >Confirm</Button>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import './Todo.scss';
+import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 
 export interface TodoProps {
@@ -122,45 +123,40 @@ export default function Todo({
           {
             (!isEditing && !isNewTodo) && (
               <>
-                <button
-                  className='edit'
-                  data-testid='edit-button'
+                <Button
+                  id='edit'
                   onClick={() => handleIsEditing(true)}
-                >Edit</button>
-                <button
-                  className='delete'
+                >Edit</Button>
+                <Button
+                  id='delete'
                   onClick={() => handleShowModal(true)}
-                  data-testid='delete-button'
-                >Delete</button>
+                >Delete</Button>
               </>
             )
           }
           {
             isEditing && (
               <>
-                <button
-                  className='update'
-                  onClick={handleUpdate}
-                  data-testid='update-button'
-                  disabled={!editedTitle.length}
-                >Update</button>
-                <button
-                  className='cancel'
+                <Button
+                  id='cancel'
                   onClick={() => handleIsEditing(false)}
-                  data-testid='cancel-button'
-                >Cancel</button>
+                >Cancel</Button>
+                <Button
+                  id='update'
+                  onClick={handleUpdate}
+                  disabledCondition={!editedTitle.length}
+                >Update</Button>
               </>
             )
           }
           {
             isNewTodo && (
               <>
-                <button
-                  className='add'
+                <Button
+                  id='add'
                   onClick={handleAdd}
-                  data-testid='add-button'
-                  disabled={!editedTitle.length}
-                >Add new to do</button>
+                  disabledCondition={!editedTitle.length}
+                >Add new to do</Button>
               </>
             )
           }
