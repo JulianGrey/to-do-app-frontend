@@ -50,9 +50,6 @@ function App() {
 
   return (
     <div id='to-do-app'>
-      <header>
-        <h1>{headerTitle}</h1>
-      </header>
       <main>
         <div className='to-do-list'>
           {
