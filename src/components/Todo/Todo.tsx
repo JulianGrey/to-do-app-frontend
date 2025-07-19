@@ -24,6 +24,8 @@ export default function Todo({
   onDelete = () => {},
   onUpdate = () => {},
 }: TodoComponentProps) {
+  const maximumTitleLength = 40;
+  const titlePlaceholder = `Maximum ${maximumTitleLength} characters`;
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
@@ -82,61 +84,18 @@ export default function Todo({
             { isNewTodo || isEditing
               ? (
                 <div className='edit-to-do-title edit-to-do'>
-                  <label htmlFor='edit-to-do-title'>Title:</label>
+                  <label htmlFor='edit-to-do-title'>Title (required):</label>
                   <input
                     id='edit-to-do-title'
                     type='text'
-                    maxLength={40}
+                    maxLength={maximumTitleLength}
                     onChange={handleEditTitle}
-                    placeholder='40 character limit'
-                    value={editedTitle} />
+                    placeholder={titlePlaceholder}
+                    value={editedTitle}
+                  />
                 </div>
-              )
-              : (<h2 className='to-do-title' data-testid='to-do-title'>{currentTitle}</h2>)
-            }
-          </div>
-          <div className='actions'>
-            {
-              (!isEditing && !isNewTodo) && (
-                <>
-                  <button
-                    className='edit'
-                    data-testid='edit-button'
-                    onClick={() => handleIsEditing(true)}
-                  >Edit</button>
-                  <button
-                    className='delete'
-                    onClick={() => handleShowModal(true)}
-                    data-testid='delete-button'
-                  >Delete</button>
-                </>
-              )
-            }
-            {
-              isEditing && (
-                <>
-                  <button
-                    className='update'
-                    onClick={handleUpdate}
-                    data-testid='update-button'
-                  >Update</button>
-                  <button
-                    className='cancel'
-                    onClick={() => handleIsEditing(false)}
-                    data-testid='cancel-button'
-                  >Cancel</button>
-                </>
-              )
-            }
-            {
-              isNewTodo && (
-                <>
-                  <button
-                    className='add'
-                    onClick={handleAdd}
-                    data-testid='add-button'
-                  >Add new to do</button>
-                </>
+              ) : (
+                <h2 className='to-do-title' data-testid='to-do-title'>{currentTitle}</h2>
               )
             }
           </div>
@@ -157,6 +116,53 @@ export default function Todo({
           }
           {currentDescription && !(isNewTodo || isEditing) &&
             <p className='to-do-description' data-testid='to-do-description'>{currentDescription}</p>
+          }
+        </div>
+        <div className='actions'>
+          {
+            (!isEditing && !isNewTodo) && (
+              <>
+                <button
+                  className='edit'
+                  data-testid='edit-button'
+                  onClick={() => handleIsEditing(true)}
+                >Edit</button>
+                <button
+                  className='delete'
+                  onClick={() => handleShowModal(true)}
+                  data-testid='delete-button'
+                >Delete</button>
+              </>
+            )
+          }
+          {
+            isEditing && (
+              <>
+                <button
+                  className='update'
+                  onClick={handleUpdate}
+                  data-testid='update-button'
+                  disabled={!editedTitle.length}
+                >Update</button>
+                <button
+                  className='cancel'
+                  onClick={() => handleIsEditing(false)}
+                  data-testid='cancel-button'
+                >Cancel</button>
+              </>
+            )
+          }
+          {
+            isNewTodo && (
+              <>
+                <button
+                  className='add'
+                  onClick={handleAdd}
+                  data-testid='add-button'
+                  disabled={!editedTitle.length}
+                >Add new to do</button>
+              </>
+            )
           }
         </div>
       </li>

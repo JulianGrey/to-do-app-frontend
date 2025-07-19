@@ -1,12 +1,17 @@
 .to-do {
   margin-top: 12px;
 
+  label {
+    margin-bottom: 4px;
+  }
+
+  .actions {
+    margin-top: 8px;
+  }
+
   .edit-to-do {
     display: flex;
-
-    label {
-      min-width: 130px;
-    }
+    flex-direction: column;
 
     &.edit-to-do-description {
       margin-top: 8px;
@@ -27,13 +32,6 @@
 
     .headline {
       align-items: baseline;
-    }
-
-    .actions {
-      button {
-        cursor: pointer;
-        margin-left: 4px;
-      }
     }
   }
 

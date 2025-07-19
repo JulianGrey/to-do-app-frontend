@@ -10,6 +10,16 @@
     }
   }
 
+  button {
+    &:not(:first-child) {
+      margin-left: 4px;
+    }
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  }
+
   .blue-container {
     border: 1px solid rgba(0, 0, 0, 0.36);
     border-radius: 10px;
