@@ -10,7 +10,6 @@ import Todo, { type TodoProps } from './components/Todo/Todo';
 
 function App() {
   const defaultMessage = 'You have no tasks.';
-  const headerTitle = 'Your To-dos';
   const [todoList, setTodoList] = useState<TodoProps[]>([]);
 
   async function handleTodoList() {

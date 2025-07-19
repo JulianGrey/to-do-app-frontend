@@ -59,17 +59,19 @@ describe('Todo component', () => {
     expect(deleteButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
 
-    fireEvent.click(editButton);
+    if (editButton) {
+      fireEvent.click(editButton);
+    }
 
     const cancelButton = findCancelButton();
-    const saveButton = findUpdateButton();
+    const updateButton = findUpdateButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
 
     expect(deleteButton).toBeNull();
     expect(editButton).toBeNull();
     expect(cancelButton).toBeInTheDocument();
-    expect(saveButton).toBeInTheDocument();
+    expect(updateButton).toBeInTheDocument();
   });
 
   it('goes back to the default actions view', () => {
@@ -77,36 +79,40 @@ describe('Todo component', () => {
     let cancelButton = findCancelButton();
     let deleteButton = findDeleteButton();
     let editButton = findEditButton();
-    let saveButton = findUpdateButton();
+    let updateButton = findUpdateButton();
 
     expect(cancelButton).toBeNull();
     expect(deleteButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
-    expect(saveButton).toBeNull();
+    expect(updateButton).toBeNull();
 
-    fireEvent.click(editButton);
+    if (editButton) {
+      fireEvent.click(editButton);
+    }
 
     cancelButton = findCancelButton();
-    saveButton = findUpdateButton();
+    updateButton = findUpdateButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
 
     expect(cancelButton).toBeInTheDocument();
     expect(deleteButton).toBeNull();
     expect(editButton).toBeNull();
-    expect(saveButton).toBeInTheDocument();
+    expect(updateButton).toBeInTheDocument();
 
-    fireEvent.click(cancelButton);
+    if (cancelButton) {
+      fireEvent.click(cancelButton);
+    }
 
     cancelButton = findCancelButton();
     deleteButton = findDeleteButton();
     editButton = findEditButton();
-    saveButton = findUpdateButton();
+    updateButton = findUpdateButton();
 
     expect(cancelButton).toBeNull();
     expect(deleteButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
-    expect(saveButton).toBeNull();
+    expect(updateButton).toBeNull();
   });
 
   it('should show the Add button for new to dos', () => {
@@ -115,13 +121,13 @@ describe('Todo component', () => {
     const cancelButton = findCancelButton();
     const deleteButton = findDeleteButton();
     const editButton = findEditButton();
-    const saveButton = findUpdateButton();
+    const updateButton = findUpdateButton();
 
     expect(addButton).toBeInTheDocument();
     expect(cancelButton).toBeNull();
     expect(deleteButton).toBeNull();
     expect(editButton).toBeNull();
-    expect(saveButton).toBeNull();
+    expect(updateButton).toBeNull();
   });
 
   it('should not show the "Add" button for saved to dos when viewing or editing', () => {
@@ -134,7 +140,9 @@ describe('Todo component', () => {
     expect(cancelButton).toBeNull();
     expect(editButton).toBeInTheDocument();
 
-    fireEvent.click(editButton);
+    if (editButton) {
+      fireEvent.click(editButton);
+    }
 
     addButton = findAddButton();
     cancelButton = findCancelButton();
@@ -150,7 +158,9 @@ describe('Todo component', () => {
     const deleteButton = findDeleteButton();
     expect(deleteButton).toBeInTheDocument();
 
-    fireEvent.click(deleteButton);
+    if (deleteButton) {
+      fireEvent.click(deleteButton);
+    }
 
     const modal = findModal();
     expect(modal).toBeInTheDocument();
