@@ -18,11 +18,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Run tests
         run: npm test
