@@ -25,7 +25,11 @@ export default function Todo({
   onDelete = () => {},
   onUpdate = () => {},
 }: TodoComponentProps) {
+  const maximumDescriptionLength = 250;
   const maximumTitleLength = 40;
+  const descriptionLabel = 'Description:';
+  const titleLabel = 'Title (required):';
+  const descriptionPlaceholder = `Maximum ${maximumDescriptionLength} characters`;
   const titlePlaceholder = `Maximum ${maximumTitleLength} characters`;
   const [currentDescription, setCurrentDescription] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
@@ -85,7 +89,7 @@ export default function Todo({
             { isNewTodo || isEditing
               ? (
                 <div className='edit-to-do-title edit-to-do'>
-                  <label htmlFor='edit-to-do-title'>Title (required):</label>
+                  <label htmlFor='edit-to-do-title'>{ titleLabel }</label>
                   <input
                     id='edit-to-do-title'
                     type='text'
@@ -105,11 +109,13 @@ export default function Todo({
           { (isNewTodo || isEditing) &&
             (
               <div className='edit-to-do-description edit-to-do'>
-                <label htmlFor='edit-to-do-description'>Description:</label>
+                <label htmlFor='edit-to-do-description'>{ descriptionLabel }</label>
                 <textarea
                   id='edit-to-do-description'
                   rows={3}
+                  maxLength={maximumDescriptionLength}
                   onChange={(event) => setEditedDescription(event.target.value)}
+                  placeholder={descriptionPlaceholder}
                   value={editedDescription}
                 ></textarea>
               </div>
@@ -151,13 +157,11 @@ export default function Todo({
           }
           {
             isNewTodo && (
-              <>
-                <Button
-                  id='add'
-                  onClick={handleAdd}
-                  disabledCondition={!editedTitle.length}
-                >Add new to do</Button>
-              </>
+              <Button
+                id='add'
+                onClick={handleAdd}
+                disabledCondition={!editedTitle.length}
+              >Add new to do</Button>
             )
           }
         </div>

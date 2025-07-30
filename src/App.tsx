@@ -7,39 +7,59 @@ import {
   updateTodo,
 } from './services/todoService';
 import Todo, { type TodoProps } from './components/Todo/Todo';
+import Spinner from './components/Spinner/Spinner';
 
 function App() {
   const defaultMessage = 'You have no tasks.';
   const [todoList, setTodoList] = useState<TodoProps[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleTodoList() {
-    setTodoList(await getTodos());
+    setIsLoading(true);
+
+    try {
+      setTodoList(await getTodos());
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function handleAddTodo(title: string, description: string) {
+    setIsLoading(true);
+
     try {
       await addTodo(title, description);
       setTodoList(await getTodos());
-    } catch (err) {
+    } catch {
       console.error('Failed to add to do');
+    } finally {
+      setIsLoading(false);
     }
   }
 
   async function handleDeleteTodo(id: number) {
+    setIsLoading(true);
+
     try {
       await deleteTodo(id);
       setTodoList(await getTodos());
-    } catch (err) {
+    } catch {
       console.error('Failed to delete to do');
+    } finally {
+      setIsLoading(false);
     }
   }
 
   async function handleUpdateTodo(title: string, description: string, id: number) {
+    setIsLoading(true);
+
     try {
       await updateTodo(title, description, id);
       setTodoList(await getTodos());
-    } catch (err) {
-      console.error('Failed to delete to do');
+    } catch {
+      console.error('Failed to update to do');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -49,6 +69,7 @@ function App() {
 
   return (
     <div id='to-do-app'>
+      <Spinner visible={isLoading} />
       <main>
         <div className='to-do-list'>
           {
@@ -73,7 +94,6 @@ function App() {
           { !todoList.length && (<p className='no-to-dos'>{defaultMessage}</p>) }
         </div>
       </main>
-      <footer></footer>
     </div>
   );
 }
